@@ -4,6 +4,9 @@
 ![arc](../pic/storage_t4c.png)
 
 ## CubeFS分布式存储和T4C归档集成
+[架构介绍](cubefs/cubefs_overview.md)```
+[配置手册](cubefs/cubefs_steps.md)```
+[Demo](cubefs/demo.md)```
 
 
 ## NFS ganesha存储和T4C归档集成
