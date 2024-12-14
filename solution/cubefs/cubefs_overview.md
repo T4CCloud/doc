@@ -18,3 +18,5 @@ CubeFS分布式文件系统支持对象、文件和HDFS协议接口，整个系�
 
 ### 归档存储系统的软件架构如下：
 ![arc](./pic/cubefs_t4c_mod.png)
+
+
