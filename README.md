@@ -27,7 +27,7 @@
 
 行业常见的分布式文件存储、HDFS大数据存储、分布式对象存储，诸如HDFS、CubeFS、Noobaa、Minio、Ganesha NFS等，都可以使用T4C归档引擎无缝集成磁带技术。
 
-分布式磁带归档系统介绍[概要](../overview/t4c_overview.md)
+分布式磁带归档系统介绍[概要](./overview/t4c_overview.md)
 
 ![arc](./overview/pic/storage_pool.png)
 
