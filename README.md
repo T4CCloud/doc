@@ -20,14 +20,14 @@
 
 行业常见的分布式文件存储、HDFS大数据存储、分布式对象存储，诸如HDFS、CubeFS、Noobaa、Minio、Ganesha NFS等，都可以使用T4C归档引擎无缝集成磁带技术。
 
-![arc](./pic/storage_pool.png)
+![arc](./overview/pic/storage_pool.png)
 
 
 
 ## 磁带存储介绍
 磁带是一项悠久的IT技术，自IBM 1952年发明磁带技术以来，磁带技术经过多次技术创新。目前主流的磁带技术是LTO联盟的LTO9磁带，以及IBM的TS1170 JF磁带，LTO9磁带可以提供18T非压缩容量，TS1170 JF可以提供惊人的50TB的容量。目前磁带产业联盟已经实现了580TB的技术原型。 
 
-![arc](./pic/580T.png)
+![arc](./overview/pic/580T.png)
 
 磁带存储广泛的应用在数据备份和数据存储领域，尤其是一些重要的数据需要离线备份、空气隔离，保障数据的安全。 
 总的来说磁带存储具有如下的优势：
@@ -38,7 +38,7 @@
 
 磁带介质需要结合带库设备一起使用，根据客户的容量和性能需求，这些设备分入门级的带库存储、中端带库设备和高端带库设备。 入门级的带库存储一般一个驱动器和数盘磁带；中端带库一般十几个驱动器和一两千盘磁带；高端带库有上百个驱动器和几万盘磁带，如IBM的TS4500、昆腾的i6000、Spectra Logic的Spectra TFinity Series。
 
-![arc](./pic/spectra.png)
+![arc](./overview/pic/spectra.png)
 
 
 
@@ -49,7 +49,7 @@ T4C拥有开发的接口，可以无缝对接基于POSIX的分布式存储系统
 
 T4C也提供丰富的Rest API接口，CubeFS等集成软件可以调用迁移召回API实现高效的数据落带召回操作；CubeFS也可以通过RestAPI来调用带库设备接口，监控带库设备加载卸载磁带的操作。 
 
-![arc](./pic/t4c.png)
+![arc](./overview/pic/t4c.png)
 
 
 ## 分布式存储集成磁带归档
@@ -61,7 +61,7 @@ T4C也提供丰富的Rest API接口，CubeFS等集成软件可以调用迁移召
 - **基于RestAPI接口的系统监控路径，集中监控运维平台监控磁带归档系统软硬件状态
 
 
-![arc](./pic/storage_t4c.png)
+![arc](./overview/pic/storage_t4c.png)
 
 
 ## T4C 团队介绍
