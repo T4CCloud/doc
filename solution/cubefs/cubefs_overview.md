@@ -18,6 +18,7 @@ CubeFS分布式文件系统支持对象、文件和HDFS协议接口，整个系�
 通过上面硬件架构可以看出，磁带库设备只跟CubeFS的数据节点连接。数据节点上需要安装磁带归档软件和带库驱动，来支持CubeFS和带库集成，实现磁带归档存储的能力。
 
 ### 归档存储系统的软件架构如下：
+
 <div align="center"> <img src=./pic/cubefs_t4c_mod.png width=70% /> </div>
 
 ## CubeFS分布式磁带归档系统清单
