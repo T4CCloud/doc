@@ -10,16 +10,16 @@ LTFSLE是带库设备的驱动程序，详细过程参考
 
 ```
 通过百度网盘分享的文件：ltfsle-2.4.3.0-10450-free.x86_64.bin
-链接：https://pan.baidu.com/s/1hgAgAhH4RZndZKhqIRtHWA 
-提取码：xmls 
+链接: https://pan.baidu.com/s/1dcdIpPBVACOrImVZGxmmSA 
+提取码: rpnc 
 ```
 
 python3-pyxattr下载如下：
 
 ```
 通过百度网盘分享的文件：python3-pyxattr-0.5.3-18.el8.x86_64...
-链接：https://pan.baidu.com/s/1nm83c8F1ia_Bs0DzbZMMAA 
-提取码：gjfp
+链接: https://pan.baidu.com/s/1OeXGeHFQi7s66dsacs57-Q 
+提取码: d6t5 
 ```
 
 ### 1.2 带库驱动最新下载
