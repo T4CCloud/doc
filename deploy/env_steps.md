@@ -185,6 +185,7 @@ Filesystem      Size  Used Avail Use% Mounted on
 [root@t4ccloud ~]# 
 ```
 
+** 注意：系统启动后，需要自动挂载缓存文件系统 **
 
 
 

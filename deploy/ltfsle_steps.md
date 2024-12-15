@@ -335,6 +335,8 @@ cb4 LTFS14113I Specified mount point is listed if succeeded.
 
 ```
 
+** 注意：系统启动后，需要自动带库驱动挂载/ltfs **
+
 * 查看驱动程序运行
 
 [root@t4ccloud ~]#  ps -ef | grep ltfs

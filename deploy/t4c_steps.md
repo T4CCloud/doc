@@ -189,7 +189,7 @@ TST002L9        1031            16344.7109375   16329.064453125 4.2373046875    
           
 ```
 
-### 3.6 T4C环境检查
+### 3.6 T4C归档引擎环境检查
 
 T4C环境配置后，可以通过命令行检查进程状态、带机状态、和磁带状态是否正常。 
 
@@ -210,7 +210,140 @@ TST002L9        1031            16344.7109375   16329.064453125 4.2373046875    
    
 ```
 
-## 4 T4C归档引擎使用说明
+
+## 4 T4C归档引擎RestAPI安装配置
+
+
+### 4.1 配置nvm安装环境
+
+创建nvm运行目录，下载nvm安装脚本
+
+```
+[root@t4ccloud ~]# mkdir /root/.nvm
+[root@t4ccloud ~]# cd /root/.nvm
+[root@t4ccloud .nvm]# vi nvm_install.sh
+[root@t4ccloud .nvm]# pwd
+/root/.nvm
+[root@t4ccloud .nvm]# tree /root/.nvm
+/root/.nvm
+└── nvm_install.sh
+
+0 directories, 1 file
+[root@t4ccloud .nvm]# 
+```
+
+### 4.2 安装nvm环境
+
+[root@t4ccloud .nvm]# bash -c '. ~/.nvm/nvm.sh; nvm install 16'
+
+```
+[root@t4ccloud .nvm]# bash -c '. ~/.nvm/nvm.sh; nvm install 16'
+Downloading and installing node v16.20.2...
+Downloading https://nodejs.org/dist/v16.20.2/node-v16.20.2-linux-x64.tar.xz...
+######################################################################################################################################## 100.0%
+Computing checksum with sha256sum
+Checksums matched!
+Now using node v16.20.2 (npm v8.19.4)
+Creating default alias: default -> 16 (-> v16.20.2)
+```
+
+### 4.3 检查nvm环境和版本
+
+[root@t4ccloud .nvm]# node -v
+
+```
+[root@t4ccloud .nvm]# node -v
+v10.23.1
+[root@t4ccloud .nvm]# 
+```
+
+
+### 4.4 创建RestAPI服务
+
+[root@t4ccloud .nvm]# cat /etc/systemd/system/restapi.service
+
+```
+[root@t4ccloud .nvm]# cat /etc/systemd/system/restapi.service
+
+[Unit]
+Description=restapi
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+User=root
+Group=root
+ExecStart=/root/.nvm/versions/node/v16.20.2/bin/node /opt/Tape4Cloud/api/index.js
+Restart=always
+LimitNOFILE=65536
+StandardOutput=append:/var/log/t4cadmin/restapi_service.log
+StandardError=append:/var/log/t4cadmin/restapi_service.err.log
+
+[Install]
+WantedBy=multi-user.target
+[root@t4ccloud .nvm]# 
+
+[root@t4ccloud .nvm]# systemctl daemon-reload
+[root@t4ccloud .nvm]# systemctl status restapi
+● restapi.service - restapi
+   Loaded: loaded (/etc/systemd/system/restapi.service; disabled; vendor preset: disabled)
+   Active: inactive (dead)
+[root@t4ccloud .nvm]# 
+```
+
+修改配置文件，用localhost替换192.168.1.19
+
+```
+[root@t4ccloud .nvm]# grep -r 192.168.1.19 /opt
+/opt/Tape4Cloud/api/api/openapi.yaml:- url: http://192.168.1.19:38080/api/v1
+/opt/Tape4Cloud/api/index.js:var serverIp = "192.168.1.19";
+```
+
+
+### 4.4 配置和启动RestAPI服务
+
+```
+[root@t4ccloud .nvm]# systemctl enable restapi
+Created symlink /etc/systemd/system/multi-user.target.wants/restapi.service → /etc/systemd/system/restapi.service.
+[root@t4ccloud .nvm]# systemctl start restapi
+[root@t4ccloud .nvm]# systemctl status restapi
+● restapi.service - restapi
+   Loaded: loaded (/etc/systemd/system/restapi.service; enabled; vendor preset: disabled)
+   Active: active (running) since Sun 2024-12-15 17:03:24 CST; 7s ago
+ Main PID: 63704 (node)
+    Tasks: 11 (limit: 50628)
+   Memory: 48.0M
+   CGroup: /system.slice/restapi.service
+           └─63704 /root/.nvm/versions/node/v16.20.2/bin/node /opt/Tape4Cloud/api/index.js
+
+Dec 15 17:03:24 t4ccloud systemd[1]: Started restapi.
+[root@t4ccloud .nvm]# 
+```
+
+### 4.5 检查RestAPI服务
+```
+[root@t4ccloud ]# curl -X GET "http://localhost:38080/api/v1/drives" -H  "accept: application/json" -H "api_key:key_t4c"
+[
+  {
+    "id": "607B800118",
+    "device_name": "/dev/sg4",
+    "slot": 257,
+    "status": "Available",
+    "usage": "free"
+  }
+   ......
+  {
+    "id": "607B800114",
+    "device_name": "/dev/sg10",
+    "slot": 260,
+    "status": "Available",
+    "usage": "free"
+  }
+][root@t4ccloud ]# 
+```
+
+
+## 5 T4C归档引擎使用说明
 
 T4C归档引擎还处在beta版本，引擎的容量和规模受到限制. 大规模使用T4C归档引擎，请联系项目团队。  
   
