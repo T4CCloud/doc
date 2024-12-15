@@ -101,7 +101,7 @@ Complete!
 
 ## 3.T4C归档引擎配置
 
-## 3.1 T4C归档引擎启动
+### 3.1 T4C归档引擎启动
 
 [root@t4ccloud t4c_image]# /usr/bin/t4cadmin startService
 
@@ -114,7 +114,7 @@ Connecting...
 The Tape for Cloud Data Management server process has been started with pid 56001.
 ```
 
-## 3.2 T4C归档引擎运行状态查看
+### 3.2 T4C归档引擎运行状态查看
 
 [root@t4ccloud t4c_image]# /usr/bin/t4cadmin status 
 
@@ -125,7 +125,7 @@ The Tape for Cloud Data Management server process is operating with pid 56001.
 ```
 
 
-## 3.3 T4C归档引擎关联缓存文件系统
+### 3.3 T4C归档引擎关联缓存文件系统
 
 [root@t4ccloud t4c_image]# /usr/bin/t4cadmin addFs /cachefs
 
@@ -147,7 +147,7 @@ device              mount point         file system type    mount options
 
 ```
 
-## 3.4 T4C归档引擎创建存储pool
+### 3.4 T4C归档引擎创建存储pool
 
 [root@t4ccloud t4c_image]# /usr/bin/t4cadmin pool create -P pool01
 
@@ -166,7 +166,7 @@ pool02       33473968     33457916     0            3
 
 
 
-## 3.5 T4C格式化磁带
+### 3.5 T4C格式化磁带
 
 [root@t4ccloud t4c_image]# /usr/bin/t4cadmin pool add -F -P pool01 -t TST002L8
 
@@ -189,7 +189,7 @@ TST002L9        1031            16344.7109375   16329.064453125 4.2373046875    
           
 ```
 
-## 3.5 T4C环境检查
+### 3.6 T4C环境检查
 
 T4C环境配置后，可以通过命令行检查进程状态、带机状态、和磁带状态是否正常。 
 
@@ -209,6 +209,14 @@ TST001L9        1031            16344.7109375   16329.064453125 4.2373046875    
 TST002L9        1031            16344.7109375   16329.064453125 4.2373046875    0               writable        pool02        1038    
    
 ```
+
+## 4 T4C归档引擎使用说明
+
+T4C归档引擎还处在beta版本，引擎的容量和规模受到限制. 大规模使用T4C归档引擎，请联系项目团队。  
+  
+  
+  
+
 
 
 
