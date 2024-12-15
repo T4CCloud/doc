@@ -172,18 +172,43 @@ pool02       33473968     33457916     0            3
 
 ```
 [root@install-machine ~]# t4cadmin show tapes
-id              slot            total           remaining       reclaimable     in progress     status          pool            state
-                                capacity (GiB)  capacity (GiB)  estimated (GiB) (GiB)
-TST001L9        1031            16344.7109375   16329.064453125 4.2373046875    0               writable        pool01         1038            TST002L9        0               0               0               0               not mounted yet n/a             not mounted
+id              slot            total           remaining       reclaimable     in progress     status          pool            state 
+                                capacity (GiB)  capacity (GiB)  estimated (GiB) (GiB) 
+TST001L9        1031            16344.7109375   16329.064453125 4.2373046875    0               writable        pool01         1038  
+TST002L9        0               0               0               0               not mounted yet n/a             not mounted 
 
 
 [root@t4ccloud t4c_image]# /usr/bin/t4cadmin pool add -F -P pool02 -t TST002L8
 Cartridge TST002L8 successfully added to tape storage pool "pool02".
 
 [root@install-machine ~]# t4cadmin show tapes
-id              slot            total           remaining       reclaimable     in progress     status          pool            state
-                                capacity (GiB)  capacity (GiB)  estimated (GiB) (GiB)
-TST001L9        1031            16344.7109375   16329.064453125 4.2373046875    0               writable        pool01        1038            TST002L9        1031            16344.7109375   16329.064453125 4.2373046875    0               writable        pool02        1038            
+id              slot            total           remaining       reclaimable     in progress     status          pool            state  
+                                capacity (GiB)  capacity (GiB)  estimated (GiB) (GiB)  
+TST001L9        1031            16344.7109375   16329.064453125 4.2373046875    0               writable        pool01        1038   
+TST002L9        1031            16344.7109375   16329.064453125 4.2373046875    0               writable        pool02        1038    
+          
 ```
+
+## 3.5 T4C环境检查
+
+T4C环境配置后，可以通过命令行检查进程状态、带机状态、和磁带状态是否正常。 
+
+```
+[root@t4ccloud t4c_image]# /usr/bin/t4cadmin status 
+The Tape for Cloud Data Management server process is operating with pid 56001.
+
+[root@t4ccloud t4c_image]# t4cadmin show drives
+id           device name   slot         status       usage
+00078xxxxB   /dev/sg6     257          Available    free
+00078xxxxB   /dev/sg4     258          Available    free
+
+[root@t4ccloud t4c_image]# t4cadmin show tapes
+id              slot            total           remaining       reclaimable     in progress     status          pool            state  
+                                capacity (GiB)  capacity (GiB)  estimated (GiB) (GiB)  
+TST001L9        1031            16344.7109375   16329.064453125 4.2373046875    0               writable        pool01        1038   
+TST002L9        1031            16344.7109375   16329.064453125 4.2373046875    0               writable        pool02        1038    
+   
+```
+
 
 
