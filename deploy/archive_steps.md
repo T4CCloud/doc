@@ -1,9 +1,10 @@
 # 数据归档配置步骤
 
+每一种分布式文件系统的数据切片模式不一样，对接时需要调研切片数据分布和命名。 
 
 ## T4C数据归档Agent
 
-调用T4C归档引擎的Agent内容如下：
+CubeFS下，调用T4C归档引擎的Agent内容如下：
 
 [root@t4ccloud ~]# cat /opt/Tape4Cloud/bin/ArchiveAgent.sh 
 
@@ -11,7 +12,7 @@
 [root@t4ccloud ~]# cat /opt/Tape4Cloud/bin/ArchiveAgent.sh
 
 #分布式存储切片数据存储路径
-data_path=/cachefs/cfs/data*
+data_path=/cachefs/cfs/data*/disk/datapartition*
 #超过多长时间的数据被迁移到磁带
 archive_atime=2
 #多大的数据切片迁移到磁带，单位MB
