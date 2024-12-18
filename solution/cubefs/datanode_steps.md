@@ -440,6 +440,16 @@ _ 后台启动Client节点
 文件系统        容量  已用  可用 已用% 挂载点
 cubefs-ltptest   10G     0   10G    0% /cfs_client
 [root@t4ccloud cubefs-master]#
+[root@t4ccloud cubefs]# df -h
+文件系统                容量  已用  可用 已用% 挂载点
+T4CADMIN:/dev/vdb        20G  295M   20G    2% /cachefs
+cubefs-ltptest           10G     0   10G    0% /cfs_client
+[root@t4ccloud cubefs]# cp cubefs-3.3.0-linux-amd64.tar.gz /cfs_client/f1
+[root@t4ccloud cubefs]# df -h
+df: /cachefs/cfs/client/mnt: 传输端点尚未连接
+文件系统                容量  已用  可用 已用% 挂载点
+T4CADMIN:/dev/vdb        20G  707M   20G    4% /cachefs
+cubefs-ltptest           10G     0   10G    0% /cfs_client
 ```
 
 ## 5. 配置CubeFS对象网关
@@ -510,25 +520,30 @@ _ 后台启动对象网关节点
 修改CubeFS的数据节点的存储路径为/cachefs/cfs/data*
 
 ```
-[root@t4ccloud bin]# cat  /opt/Tape4Cloud/bin/ArchiveAgent.sh
-
 #分布式存储切片数据存储路径
 data_path=/cachefs/cfs/data*
 #超过多长时间的数据被迁移到磁带
-archive_atime=30
+archive_atime=2
 #多大的数据切片迁移到磁带，单位MB
 archive_size=1
+#tape pool
+t4c_pool=pool01
+
 
 mkdir -p /tmp/t4c_jobs/
 
 mig_files=mig-`date +"%Y%m%d%H%M%S"`
 #查找满足条件的文件列表
-find {{data_path}} -type f -amin +{{archive_atime}} -size +{{archive_size}} \
+
+echo find $data_path -type f -amin +$archive_atime -size +$archive_size \
+ -exec du -h {} + | awk '$1 ~ /[0-9]+[KMG]/ && (($1 ~ /K/ && $1+0 > 1024) || $1 ~ /[MG]/) {print $0}' \
+ | grep -v "minio.sys" | awk '{$1=""; print $0}' | awk '{print substr($0, 2)}' > /tmp/t4c_jobs/$mig_files
+
+find $data_path -type f -amin +$archive_atime -size +$archive_size \
  -exec du -h {} + | awk '$1 ~ /[0-9]+[KMG]/ && (($1 ~ /K/ && $1+0 > 1024) || $1 ~ /[MG]/) {print $0}' \
  | grep -v "minio.sys" | awk '{$1=""; print $0}' | awk '{print substr($0, 2)}' > /tmp/t4c_jobs/$mig_files
 
 #迁移数据到磁带，如果是召回数据，chunk本地磁盘空间
-/opt/Tape4Cloud/bin/t4cadmin migrate -P {{t4c_pool}} -f /tmp/t4c_jobs/$mig_files
-[root@t4ccloud bin]#
+/opt/Tape4Cloud/bin/t4cadmin migrate -P $t4c_pool -f /tmp/t4c_jobs/$mig_files
 
 ```
