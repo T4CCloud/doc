@@ -18,12 +18,11 @@ CubeFS数据节点带库驱动配置[步骤](../../deploy/ltfsle_steps.md)
 CubeFS数据节点T4C引擎安装和配置[步骤](../../deploy/ltfsle_steps.md)
 
 
-## 归档节点CubeFS DataNode软件安装和配置
-CubeFS数据节点T4C引擎安装和配置[步骤](./datanode_steps.md)
-
 ## 归档节点归档服务配置
 CubeFS数据节点归档服务安装和配置[步骤](../../deploy/archive_steps.md)
 
+## 归档节点CubeFS DataNode软件安装和配置
+CubeFS数据节点T4C引擎安装和配置[步骤](./datanode_steps.md)
 
 ## 归档作业运维监控
 CubeFS数据节点上的归档作业操作[步骤](../../user_guide/t4c_operation.md)
