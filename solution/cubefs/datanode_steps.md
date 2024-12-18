@@ -521,7 +521,7 @@ _ 后台启动对象网关节点
 
 ```
 #分布式存储切片数据存储路径
-data_path=/cachefs/cfs/data*
+data_path=/cachefs/cfs/data*/disk/datapartition*
 #超过多长时间的数据被迁移到磁带
 archive_atime=2
 #多大的数据切片迁移到磁带，单位MB
