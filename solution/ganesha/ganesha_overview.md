@@ -3,7 +3,9 @@
 ## NFS-Ganesha介绍
 
 NFS-Ganesha 是一个开源的 NFS（网络文件系统）服务器，它实现了 NFSv3、NFSv4 和 NFSv4.1 协议。它是一个开源软件项目，它充当一个用户空间文件系统，用于将特定的存储后端（如 ceph）映射到Linux操作系统的标准文件系统接口上。换句话说，NFS-Ganesha允许应用程序和用户像操作常规文件系统一样来访问和交互那些不直接提供POSIX接口的存储系统，使得开发者和用户能够在不了解ceph复杂性的情况下利用其高性能和规模化的存储能力。这意味着用户可以使用熟悉的命令行工具（如ls、cp）、应用程序或者库（通过open、read、write等系统调用）来访问存储在ceph中的数据，而不需要修改这些工具或应用程序以直接支持ceph API/DAOS API。
-<div align="center"> <img src=./pic/ganesha.png width=70% /> </div>
+
+<div align="center"> <img src=./pic/nfs-ganesha.png width=70% /> </div>
+
 
 ### 主要特点：
  * 协议支持：支持多种 NFS 协议版本，确保与不同客户端兼容。
@@ -26,11 +28,11 @@ NFS-Ganesha 是一个开源的 NFS（网络文件系统）服务器，它实现�
 
 ### 归档存储系统的硬件架构如下：
 
-<div align="center"> <img src=./pic/ganesha_t4c.png width=70% /> </div>
+<div align="center"> <img src=./pic/ganesha-t4c-hw.png width=70% /> </div>
 
 通过上面硬件架构可以看出，磁带库设备跟Ganesha Server节点连接。Ganesha Server节点上需要安装磁带归档软件和带库驱动，来支持Ganesha Server节点和带库集成，实现磁带归档存储的能力。
 
 ### 归档存储系统的软件架构如下：
 
-<div align="center"> <img src=./pic/ganesha_t4c.png width=70% /> </div>
+<div align="center"> <img src=./pic/ganesha-t4c.png width=70% /> </div>
 
